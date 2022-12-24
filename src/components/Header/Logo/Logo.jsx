@@ -1,15 +1,10 @@
-import React from 'react';
 import style from './Logo.module.css';
-import logo from './img/logo.svg'
+import logo from './img/logo.svg';
 
-const Logo = props => {
+const Logo = props => (
+  <a className = {style.link} href = '/'>
+    <img className={style.logo} src={logo} alt="logo" />
+  </a>
+);
 
-  return(
-      <a className = {style.link} href = '/'>
-        <img className={style.logo} src={logo} alt="logo" />
-      </a>
-    ) 
-    
-}
-
-export default  Logo
+export default Logo;
