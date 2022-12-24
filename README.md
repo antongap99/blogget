@@ -1,1 +1,1 @@
-new react progect blogget
+new react project blogget
