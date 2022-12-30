@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { URL_API } from '../api/const';
-import { useToken } from "./useToken";
+import { tokenContext } from "../context/tokenContext";
 
-export const useAuth = (state) => {
-  const [auth, setAuth] = useState(state);
-
-  const [token] = useToken('');
+export const useAuth = () => {
+  const [auth, setAuth] = useState({});
+  const {token, delToken} = useContext(tokenContext);
 
 
   useEffect(() => {
@@ -15,6 +14,7 @@ export const useAuth = (state) => {
         Authorization: `bearer ${token}`,
       }
     }).then((response) => response.json()).then((data) => {
+      console.log(data);
       const img = data.icon_img.replace(/\?.*$/, '');
       setAuth({
         name: data.name,
@@ -24,8 +24,15 @@ export const useAuth = (state) => {
       console.log(err);
       // если время авторизации прошло
       setAuth({});
+      delToken('')
     })
-  }, [token])
+  }, [token, delToken]);
 
-  return [auth, setAuth];
+  const clearAuth = () => {
+    setAuth({});
+    localStorage.removeItem('bearer');
+  };
+
+
+  return [auth, clearAuth];
 }

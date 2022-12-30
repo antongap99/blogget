@@ -2,8 +2,26 @@ import React from 'react';
 import style from './List.module.css';
 import Post from './Post/index';
 import PropTypes from 'prop-types';
+import { postsContext } from '../../../context/postContext';
+import { useContext } from 'react';
 
-export const List = (props) => {
+export const List = () => {
+
+  const {posts}= useContext(postsContext);
+  console.log('posts: ', posts);
+ 
+  const renderData = () => {
+    try {
+      const data = posts.map((item) => (
+        <Post key={item.id} postData={item}/>
+      ))
+      return data;
+    } catch (error) {
+      console.log('загрузка');
+    }
+
+  }
+
   const postsData = [
     {
       thumbnail: '',
@@ -41,9 +59,7 @@ export const List = (props) => {
   return (
     <ul className={style.list}>
       {
-        postsData.map((postData) => (
-          <Post key={postData.id} postData={postData}/>
-        ))
+       renderData()
       }
     </ul>
   )

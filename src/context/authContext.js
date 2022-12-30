@@ -1,0 +1,22 @@
+import React from 'react';
+import PropTypes from 'prop-types'
+import { useAuth } from '../hooks/useAuth';
+
+
+export const authContext = React.createContext({});
+
+
+export const AuthContectProvider = ({children}) => {
+  const [auth, clearAuth] = useAuth();
+
+  return (
+    <authContext.Provider value={{auth, clearAuth}}>
+      {children}
+    </authContext.Provider>
+  )
+}
+
+
+AuthContectProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+}
