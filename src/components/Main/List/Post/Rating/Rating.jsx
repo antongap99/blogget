@@ -2,7 +2,6 @@ import React from 'react';
 import style from './Rating.module.css';
 
 export const Rating = ({ups}) => {
-  console.log('ups: ', ups);
 
   return (
     <div className={style.rating}>

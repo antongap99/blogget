@@ -5,6 +5,7 @@ import { useToken } from '../hooks/useToken';
 
 
 export const tokenContext = React.createContext({});
+tokenContext.displayName = 'MyDisplayName';
 
 // любой контекст состоит провайдера и консьюмера
 

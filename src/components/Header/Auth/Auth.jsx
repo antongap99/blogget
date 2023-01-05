@@ -8,10 +8,12 @@ import { Text } from '../../../UI/Text/Text';
 import {useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { authContext } from '../../../context/authContext';
+import { postsContext } from '../../../context/postContext';
 
 const Auth = () => {
   const [showLogout, setShowLogout] = useState(false);
-  const {auth, clearAuth} = useContext(authContext)
+  const {auth, clearAuth} = useContext(authContext);
+  const {setBestPosts} = useContext(postsContext)
 
   const getOut = () => { 
       setShowLogout(!showLogout);
@@ -20,6 +22,8 @@ const Auth = () => {
   const logOut = () => {
     clearAuth({});
     setShowLogout(false);
+    setBestPosts({})
+    localStorage.removeItem('posts');
     window.location.href = 'http://localhost:3000/'
   }
 

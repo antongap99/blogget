@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 
 
 export const authContext = React.createContext({});
+authContext.displayName = 'authContext'
 
 
 export const AuthContectProvider = ({children}) => {

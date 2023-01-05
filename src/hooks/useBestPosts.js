@@ -12,9 +12,9 @@ export const useBestPosts = (state) => {
   }
 
   useEffect(() => {
-    if(localStorage.getItem('posts')){
-      setBestPosts(JSON.parse(localStorage.getItem('posts')))
-    } else {
+    // if(localStorage.getItem('posts')){
+    //   setBestPosts(JSON.parse(localStorage.getItem('posts')));
+    // } else {
       fetch(`${URL_API}/best`, {
         headers: {
           Authorization: `bearer ${token}`,
@@ -32,7 +32,8 @@ export const useBestPosts = (state) => {
       })
     }
   
-  }, [token])
+  // } 
+  , [token])
 
 
  

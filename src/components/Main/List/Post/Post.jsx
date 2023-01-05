@@ -13,14 +13,13 @@ export const Post = ({postData}) => {
     author,
     thumbnail,
     ups,
-
+    selftext: markdown,
   } = postData;
-
-  
+ 
   return(
     <li className = {style.post}>
       <img className={style.img} src={thumbnail === 'default' || thumbnail === "self"  ? notPhoto : thumbnail} alt={title} />
-      <Content author={author} titleName={title}/>
+      <Content author={author} title={title} markdown={markdown}/>
       <Rating ups={ups} />
       {/* <PostTime date={date}/> */}
       <Delete/>
