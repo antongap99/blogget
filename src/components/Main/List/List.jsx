@@ -15,7 +15,7 @@ export const List = () => {
       ))
       return data;
     } catch (error) {
-      console.log('загрузка');
+      // console.log('загрузка');
       return (
           <li>
             <h1>Попробуйте авторизоваться</h1>

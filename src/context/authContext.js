@@ -8,7 +8,7 @@ authContext.displayName = 'authContext'
 
 
 export const AuthContectProvider = ({children}) => {
-  const [auth, clearAuth] = useAuth();
+  const [auth, clearAuth] = useAuth(authContext);
 
   return (
     <authContext.Provider value={{auth, clearAuth}}>

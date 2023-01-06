@@ -14,7 +14,6 @@ export const useAuth = () => {
         Authorization: `bearer ${token}`,
       }
     }).then((response) => response.json()).then((data) => {
-      console.log(data);
       const img = data.icon_img.replace(/\?.*$/, '');
       setAuth({
         name: data.name,

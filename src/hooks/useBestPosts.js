@@ -22,7 +22,6 @@ export const useBestPosts = (state) => {
       })
       .then((response) => response.json())
       .then((data) => {  
-        console.log('data: ', data);
         const postData = transformData(data)
         setBestPosts(postData);
         localStorage.setItem('posts', JSON.stringify(postData));

@@ -25,6 +25,7 @@ export const transformData = (data) => {
         selftext,
       }
     });
+
     return newData;
   } catch (error) {
     console.log('загрузка');

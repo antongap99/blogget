@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Modal } from '../../../../Modal/Modal';
 
 
-export const Content = ({ author, title, markdown }) => {
+export const Content = ({ author, title, markdown, id }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
@@ -19,6 +19,7 @@ export const Content = ({ author, title, markdown }) => {
       >
         <a className={style.linkPost} href="#post" onClick={() => {
           setIsModalOpen(true);
+          document.body.style.overflow = 'hidden';
         }}>{title}</a>
       </Text>
 
@@ -33,9 +34,8 @@ export const Content = ({ author, title, markdown }) => {
       </Text>
       {isModalOpen &&
         <Modal
-          markdown={markdown}
-          author={author}
-          title={title}
+         id={id}
+         markdown={markdown}
           closeModal={() => {
             setIsModalOpen(false)
           }} />}

@@ -8,9 +8,7 @@ import {URL_AUTH,
 
 
 const searchParams = new URLSearchParams('');
-const url =new URL(URL_AUTH);
-console.log('url: ', url);
-console.log('searchParams: ', searchParams);
+
 
 searchParams.append('client_id', CLIENT_ID); 
 searchParams.append('response_type', RESPONSE_TYPE); 
