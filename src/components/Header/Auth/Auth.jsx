@@ -13,9 +13,9 @@ import { postsContext } from '../../../context/postContext';
 const Auth = () => {
   const [showLogout, setShowLogout] = useState(false);
   const {auth, clearAuth} = useContext(authContext);
-  const {setBestPosts} = useContext(postsContext)
+  const {setBestPosts} = useContext(postsContext);
 
-  const getOut = () => { 
+  const getOut = () => {
       setShowLogout(!showLogout);
   }
 
@@ -36,7 +36,7 @@ const Auth = () => {
             <img className={style.img} src={auth.img} title={auth.name} alt={auth.name} />
           </button>
           {showLogout && <button className={style.logout} onClick={logOut}>выйти</button>}
-          
+
             <Text className={style.title} center size={12} tsize={16} dsize={20}>{auth.name}</Text>
           </>
         )

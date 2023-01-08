@@ -1,11 +1,12 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { URL_API } from '../api/const';
-import { tokenContext } from "../context/tokenContext";
+import { useDispatch, useSelector } from 'react-redux';
+import {  deleteToken } from '../store';
 
 export const useAuth = () => {
   const [auth, setAuth] = useState({});
-  const {token, delToken} = useContext(tokenContext);
-
+  const token = useSelector(state => state.token);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (!token) return;
@@ -23,9 +24,9 @@ export const useAuth = () => {
       console.log(err);
       // если время авторизации прошло
       setAuth({});
-      delToken('')
+      dispatch(deleteToken());
     })
-  }, [token, delToken]);
+  }, [token]);
 
   const clearAuth = () => {
     setAuth({});

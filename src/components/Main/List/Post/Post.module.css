@@ -4,8 +4,8 @@
   position: relative;
   flex: 0 1 260px;
   display: grid;
-  grid-template-columns: 120px 120px min-content;
-  min-height: 120px;
+  grid-template-columns: 100px 100px 60px;
+  min-height: 100px;
   grid-template-areas:
       'img content rating'
       'img content rating'
@@ -14,7 +14,6 @@
   background: var(--white);
   box-shadow: 0px 0px 10px rgb(0 0 0 / 10%);
   border-radius: 20px;
-
 }
 @media(min-width: 420px){
   .post {

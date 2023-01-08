@@ -14,8 +14,8 @@ export const Modal = ({ closeModal, id , markdown}) => {
   const closeBtnRef = useRef(null);
 
   const [comment] = useCommentsData(id);
-  const [isOpenCommentForm, setIsOpenCommentForm ] = useState(false)
-  
+  const [isOpenCommentForm, setIsOpenCommentForm ] = useState(false);
+
 
   const handleClick = e => {
     const target = e.target;
@@ -79,7 +79,7 @@ export const Modal = ({ closeModal, id , markdown}) => {
               <Comments/>
               <button className={style.button} onClick={() => {setIsOpenCommentForm(!isOpenCommentForm)}}>Написать комментарий</button>
               {isOpenCommentForm &&  <FormComment/>}
-             
+
             </>)
           : 'Загрузка...'
         }

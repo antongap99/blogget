@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import style from './Header.module.css';
 
 
-// props - параметры , которые получает компонент
 export const Header = () => {
 
 

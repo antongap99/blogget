@@ -1,7 +1,13 @@
 import { createStore } from 'redux';
-const UPDATE_COMMENT = 'UPDATE_COMMENT'
+import { composeWithDevTools } from '@redux-devtools/extension';
+import { getToken, setToken } from '../api/token';
+
+const UPDATE_COMMENT = 'UPDATE_COMMENT';
+const UPDATE_TOKEN = 'UPDATE_TOKEN';
+const DELETE_TOKEN = 'DELETE_TOKEN';
 const initialState = {
-  comment: 'Привет redux'
+  comment: 'Привет redux',
+  token: getToken(),
 }
 
 
@@ -9,19 +15,42 @@ const initialState = {
 export const updateComment = (comment) => ({
   type: UPDATE_COMMENT,
   comment,
-})
+});
+
+export const updateToken = (token) => ({
+  type: UPDATE_TOKEN,
+  token,
+});
+
+export const deleteToken = () => ({
+  type: DELETE_TOKEN,
+  token: '',
+});
 
 const rootReducer = (state = initialState, action) => {
-    switch (action.type) {
-      case UPDATE_COMMENT:
-        return {
-          ...state,
-          comment: action.comment,
-        }
-    
-      default:
-        return state;
-    }
+  switch (action.type) {
+    case UPDATE_COMMENT:
+      return {
+        ...state,
+        comment: action.comment,
+      }
+    case UPDATE_TOKEN:
+      // выполнить побочные действия
+      setToken(action.token);
+      return {
+        ...state,
+        token: action.token,
+      }
+    case DELETE_TOKEN:
+      // выполнить побочные действия
+      setToken('');
+      return {
+        ...state,
+        token: '',
+      }
+    default:
+      return state;
+  }
 };
 
-export const store = createStore(rootReducer);
+export const store = createStore(rootReducer, composeWithDevTools());

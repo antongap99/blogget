@@ -7,7 +7,7 @@ import { useContext } from 'react';
 
 export const List = () => {
   const {posts}= useContext(postsContext);
- 
+
   const renderData = () => {
     try {
       const data = posts.map((item) => (
@@ -15,7 +15,6 @@ export const List = () => {
       ))
       return data;
     } catch (error) {
-      // console.log('загрузка');
       return (
           <li>
             <h1>Попробуйте авторизоваться</h1>
