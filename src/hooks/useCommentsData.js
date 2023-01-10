@@ -4,7 +4,7 @@ import { URL_API } from "../api/const";
 
 export const useCommentsData = (postId) => {
   const [comment, setComment] = useState(null);
-  const token = useSelector(state => state.token);
+  const token = useSelector(state => state.token.token);
 
   useEffect(() => {
     fetch(`${URL_API}/comments/${postId}`, {

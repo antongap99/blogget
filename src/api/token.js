@@ -4,21 +4,25 @@
 
 
 export const setToken = (token) => {
-  localStorage.getItem('bearer');
+  localStorage.setItem('bearer', token);
 }
 
 export const getToken = () => {
   let token = '';
   // после авторизации
   if (window.location.pathname.includes('/auth')) {
-     token = new URLSearchParams(window.location.hash.substring(1)).get('access_token');
+    token = new URLSearchParams(window.location.hash.substring(1)).get('access_token');
+   
 
     setToken(token);
   }
   // взять токен из local storage
   if (localStorage.getItem('bearer')) {
-    setToken(localStorage.getItem('bearer'));
+    token = localStorage.getItem('bearer');
   }
+
+
+
 
   return token;
 }

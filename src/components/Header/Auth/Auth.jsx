@@ -9,11 +9,14 @@ import {useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { authContext } from '../../../context/authContext';
 import { postsContext } from '../../../context/postContext';
+import { useDispatch } from 'react-redux';
+import { deleteToken } from '../../../store/tokenReducer';
 
 const Auth = () => {
   const [showLogout, setShowLogout] = useState(false);
   const {auth, clearAuth} = useContext(authContext);
   const {setBestPosts} = useContext(postsContext);
+  const dispatch =  useDispatch();
 
   const getOut = () => {
       setShowLogout(!showLogout);
@@ -24,7 +27,8 @@ const Auth = () => {
     setShowLogout(false);
     setBestPosts({})
     localStorage.removeItem('posts');
-    window.location.href = 'http://localhost:3000/'
+    dispatch(deleteToken())
+    // window.location.href = 'http://localhost:3000/'
   }
 
   return (

@@ -15,7 +15,6 @@ export const Content = ({ author, title, markdown, id }) => {
         size={14}
         tsize={18}
         dsize={20}
-        className={style.title}
       >
         <a className={style.linkPost} href="#post" onClick={() => {
           setIsModalOpen(true);

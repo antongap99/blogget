@@ -5,7 +5,8 @@ import { transformData } from "../utilities/transformData";
 
 export const useBestPosts = (state) => {
   const [posts, setPosts] = useState(state);
-  const token = useSelector(state => state.token);
+  const token = useSelector(state => state.token.token);
+ 
 
   const setBestPosts = (state) => {
     setPosts(state);
