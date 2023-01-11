@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { authContext } from '../../../context/authContext';
 import { postsContext } from '../../../context/postContext';
 import { useDispatch } from 'react-redux';
-import { deleteToken } from '../../../store/tokenReducer';
+import { deleteToken } from '../../../store/token/tokenAction';
 
 const Auth = () => {
   const [showLogout, setShowLogout] = useState(false);

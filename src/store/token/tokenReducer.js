@@ -1,21 +1,13 @@
-import {  setToken } from '../api/token';
-const UPDATE_TOKEN = 'UPDATE_TOKEN';
-const DELETE_TOKEN = 'DELETE_TOKEN';
+import {  setToken } from '../../api/token';
+import { DELETE_TOKEN, UPDATE_TOKEN } from './tokenAction';
+
 
 
 const initialState = {
   token: '',
 }
 
-export const deleteToken = () => ({
-  type: DELETE_TOKEN,
-  token: '',
-});
 
-export const updateToken = (token) => ({
-  type: UPDATE_TOKEN,
-  token: token,
-});
 
 
 export const tokenMiddleware = store => next => (action) => {
@@ -27,7 +19,7 @@ export const tokenMiddleware = store => next => (action) => {
     setToken('');
   }
 
-  next(action)
+  next(action);
 }
 
 export const tokenReducer = (state = initialState, action) => {

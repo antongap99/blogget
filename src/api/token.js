@@ -20,9 +20,6 @@ export const getToken = () => {
     token = localStorage.getItem('bearer');
   }
 
-
-
-
   return token;
 }
 

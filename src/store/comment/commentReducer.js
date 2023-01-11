@@ -1,19 +1,8 @@
-
-
-const UPDATE_COMMENT = 'UPDATE_COMMENT';
-
-
+import { UPDATE_COMMENT } from "./commentAction";
 
 const initialState = {
   comment: 'Привет redux',
 }
-
-
-export const updateComment = (comment) => ({
-  type: UPDATE_COMMENT,
-  comment,
-});
-
 
 
 export const commentReducer = (state = initialState, action) => {

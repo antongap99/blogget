@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { URL_API } from "../api/const";
@@ -7,18 +8,12 @@ export const useCommentsData = (postId) => {
   const token = useSelector(state => state.token.token);
 
   useEffect(() => {
-    fetch(`${URL_API}/comments/${postId}`, {
+    axios.get(`${URL_API}/comments/${postId}`, {
       headers: {
         Authorization: `bearer ${token}`,
       },
     })
-      .then(resp => {
-        if (resp.status === 401) {
-          throw new Error(resp.status);
-        }
-        return resp.json();
-      })
-      .then(postData => {
+      .then(({data: postData}) => {
         const [
           { data: {
             children: [{ data: { author, preview: { images: [{ source: { url } }] } } }]

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux";
 import { URL_API } from '../api/const';
@@ -13,22 +14,18 @@ export const useBestPosts = (state) => {
   }
 
   useEffect(() => {
-    // if(localStorage.getItem('posts')){
-    //   setBestPosts(JSON.parse(localStorage.getItem('posts')));
-    // } else {
-      fetch(`${URL_API}/best`, {
+      axios.get(`${URL_API}/best`, {
         headers: {
           Authorization: `bearer ${token}`,
         }
       })
-      .then((response) => response.json())
-      .then((data) => {
+      .then(({data}) => {
         const postData = transformData(data)
         setBestPosts(postData);
         localStorage.setItem('posts', JSON.stringify(postData));
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
       })
     }
 

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { authContext } from '../../../context/authContext';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './FormComment.module.css';
-import { updateComment } from '../../../store/commentReducer';
+import { updateComment } from '../../../store/comment/commentAction';
 
 export const FormComment = () => {
   const {auth} = useContext(authContext);
