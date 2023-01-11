@@ -1,8 +1,8 @@
-import { combineReducers, createStore } from 'redux';
+import { combineReducers, createStore, applyMiddleware} from 'redux';
 import { composeWithDevTools } from '@redux-devtools/extension';
 import { commentReducer } from './commentReducer';
 import { tokenReducer } from './tokenReducer';
-
+import { tokenMiddleware } from './tokenReducer';
 
 
 const rootReducer = combineReducers({
@@ -10,6 +10,10 @@ const rootReducer = combineReducers({
   token: tokenReducer,
 })
 
+const logger = (store) => (next) => (action) => {
+  console.log('action ',action);
+  next(action);
+}
 
 
-export const store = createStore(rootReducer, composeWithDevTools());
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(tokenMiddleware)));
