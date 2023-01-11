@@ -5,27 +5,28 @@ import style from './Auth.module.css';
 import { ReactComponent as SaveIcon } from './img/login.svg';
 import { auth_url } from '../../../api/auth';
 import { Text } from '../../../UI/Text/Text';
-import {useContext, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { authContext } from '../../../context/authContext';
-import { postsContext } from '../../../context/postContext';
 import { useDispatch } from 'react-redux';
 import { deleteToken } from '../../../store/token/tokenAction';
+import { useAuth } from '../../../hooks/useAuth';
+import { AuthLoader } from '../../../UI/AuthLoader/AuthLoader'
+import { useBestPosts } from '../../../hooks/useBestPosts';
 
 const Auth = () => {
   const [showLogout, setShowLogout] = useState(false);
-  const {auth, clearAuth} = useContext(authContext);
-  const {setBestPosts} = useContext(postsContext);
-  const dispatch =  useDispatch();
+  const [auth, loading, clearAuth] = useAuth();
+  const [, setBestPosts] = useBestPosts();
+  const dispatch = useDispatch();
 
   const getOut = () => {
-      setShowLogout(!showLogout);
+    setShowLogout(!showLogout);
   }
 
   const logOut = () => {
     clearAuth({});
     setShowLogout(false);
-    setBestPosts({})
+    setBestPosts([])
     localStorage.removeItem('posts');
     dispatch(deleteToken())
     // window.location.href = 'http://localhost:3000/'
@@ -33,13 +34,13 @@ const Auth = () => {
 
   return (
     <div className={style.container}>
-      {auth.name ?
+      {loading ? (<AuthLoader />) : auth.name ?
         (
           <>
-          <button className={style.btn} onClick={getOut}>
-            <img className={style.img} src={auth.img} title={auth.name} alt={auth.name} />
-          </button>
-          {showLogout && <button className={style.logout} onClick={logOut}>выйти</button>}
+            <button className={style.btn} onClick={getOut}>
+              <img className={style.img} src={auth.img} title={auth.name} alt={auth.name} />
+            </button>
+            {showLogout && <button className={style.logout} onClick={logOut}>выйти</button>}
 
             <Text className={style.title} center size={12} tsize={16} dsize={20}>{auth.name}</Text>
           </>

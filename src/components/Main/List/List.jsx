@@ -2,11 +2,10 @@ import React from 'react';
 import style from './List.module.css';
 import Post from './Post/index';
 import PropTypes from 'prop-types';
-import { postsContext } from '../../../context/postContext';
-import { useContext } from 'react';
+import { useBestPosts } from '../../../hooks/useBestPosts';
 
 export const List = () => {
-  const {posts}= useContext(postsContext);
+  const [posts]= useBestPosts();
 
   const renderData = () => {
     try {

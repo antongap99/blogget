@@ -1,39 +1,16 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { URL_API } from "../api/const";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { requestCommentDataAsync } from "../store/comment/commentAction";
 
 export const useCommentsData = (postId) => {
-  const [comment, setComment] = useState(null);
+  const comment = useSelector(state => state.comment.commentData);
+  console.log('comment: ', comment);
   const token = useSelector(state => state.token.token);
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    axios.get(`${URL_API}/comments/${postId}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-    })
-      .then(({data: postData}) => {
-        const [
-          { data: {
-            children: [{ data: { author, preview: { images: [{ source: { url } }] } } }]
-          } },
-          { data: {
-            children: [{ data: { author: authorComments, body } }]
-          } },
-        ] = postData
-
-
-        setComment({
-          author,
-          authorComments,
-          url,
-          body,
-        })
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+    dispatch(requestCommentDataAsync(postId));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postId, token]);
 
 

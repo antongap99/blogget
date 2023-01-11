@@ -14,6 +14,7 @@ export const Modal = ({ closeModal, id , markdown}) => {
   const closeBtnRef = useRef(null);
 
   const [comment] = useCommentsData(id);
+  console.log('comment: ', comment);
   const [isOpenCommentForm, setIsOpenCommentForm ] = useState(false);
 
 

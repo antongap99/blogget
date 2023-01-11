@@ -1,36 +1,20 @@
-import axios from "axios";
-import { useState, useEffect } from "react"
-import { useSelector } from "react-redux";
-import { URL_API } from '../api/const';
-import { transformData } from "../utilities/transformData";
+import {  useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux";
+import { postClear, postDataRequestAsync } from "../store/postData/postDataAction";
 
-export const useBestPosts = (state) => {
-  const [posts, setPosts] = useState(state);
+export const useBestPosts = () => {
+  const posts = useSelector(state => state.postData.postData);
   const token = useSelector(state => state.token.token);
- 
+  const dispatch = useDispatch();
 
-  const setBestPosts = (state) => {
-    setPosts(state);
+  const setBestPosts = () => {
+    dispatch(postClear())
   }
 
   useEffect(() => {
-      axios.get(`${URL_API}/best`, {
-        headers: {
-          Authorization: `bearer ${token}`,
-        }
-      })
-      .then(({data}) => {
-        const postData = transformData(data)
-        setBestPosts(postData);
-        localStorage.setItem('posts', JSON.stringify(postData));
-      })
-      .catch((err) => {
-        console.log(err.message);
-      })
-    }
-
-  // }
-  , [token])
+    dispatch(postDataRequestAsync());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  } , [token])
 
 
 
