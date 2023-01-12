@@ -8,7 +8,7 @@ export const useBestPosts = () => {
   const dispatch = useDispatch();
 
   const setBestPosts = () => {
-    dispatch(postClear())
+    dispatch(postClear());
   }
 
   useEffect(() => {

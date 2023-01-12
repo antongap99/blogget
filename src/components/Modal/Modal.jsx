@@ -7,6 +7,7 @@ import { useRef , useState, useEffect} from 'react';
 import { useCommentsData } from '../../hooks/useCommentsData';
 import { FormComment } from './FormComment/FormComment';
 import { Comments } from './Comments/Comments';
+import { Loader } from '../../UI/Loader/Loader'
 
 export const Modal = ({ closeModal, id , markdown}) => {
 
@@ -14,7 +15,6 @@ export const Modal = ({ closeModal, id , markdown}) => {
   const closeBtnRef = useRef(null);
 
   const [comment] = useCommentsData(id);
-  console.log('comment: ', comment);
   const [isOpenCommentForm, setIsOpenCommentForm ] = useState(false);
 
 
@@ -49,7 +49,7 @@ export const Modal = ({ closeModal, id , markdown}) => {
   return ReactDOM.createPortal(
     <div className={style.overlay} ref={overlayRef}>
       <div className={style.modal}>
-        {comment ?
+        {comment.author ?
           (
             <>
               <h2 className={style.title}>{'title'}</h2><div className={style.content}>
@@ -80,9 +80,8 @@ export const Modal = ({ closeModal, id , markdown}) => {
               <Comments/>
               <button className={style.button} onClick={() => {setIsOpenCommentForm(!isOpenCommentForm)}}>Написать комментарий</button>
               {isOpenCommentForm &&  <FormComment/>}
-
             </>)
-          : 'Загрузка...'
+          : <div className={style.loadwrap}><Loader color={ "#99bab3"} size={50}/></div>
         }
 
         <button className={style.close} ref={closeBtnRef}><CloseIcon /></button>

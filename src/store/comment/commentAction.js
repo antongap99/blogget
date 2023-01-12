@@ -25,7 +25,7 @@ export const commentRequestError = (error) => ({
   error,
 });
 
-export const requestCommentDataAsync = (postId)  => (dispatch, getState)=> {
+export const requestCommentDataAsync = (postId)  => (dispatch, getState) => {
   const token = getState().token.token;
   dispatch(commentRequest());
   axios.get(`${URL_API}/comments/${postId}`, {

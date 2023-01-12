@@ -10,8 +10,9 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { deleteToken } from '../../../store/token/tokenAction';
 import { useAuth } from '../../../hooks/useAuth';
-import { AuthLoader } from '../../../UI/AuthLoader/AuthLoader'
+import { Loader } from '../../../UI/Loader/Loader'
 import { useBestPosts } from '../../../hooks/useBestPosts';
+import { Notification } from '../../Notification/Notification';
 
 const Auth = () => {
   const [showLogout, setShowLogout] = useState(false);
@@ -34,7 +35,7 @@ const Auth = () => {
 
   return (
     <div className={style.container}>
-      {loading ? (<AuthLoader />) : auth.name ?
+      {loading ? (<Loader color={ "#99bab3"} size={15}/>) : auth.name ?
         (
           <>
             <button className={style.btn} onClick={getOut}>
@@ -49,7 +50,9 @@ const Auth = () => {
         (
           <Text className={style.authLink} As={'a'} href={auth_url}>
             <SaveIcon className={style.svg} />
+            <Notification log={'Ошибка авторизации. Попробуйте авторизоваться еще раз'}/>
           </Text>
+          
         )
       }
     </div>

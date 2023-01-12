@@ -1,7 +1,6 @@
 import { randomText } from "./randomText";
 
 export const transformData = (data) => {
-  try {
     const posts = data.data.children;
     const newData = posts.map(item => {
       let {data: {
@@ -26,9 +25,8 @@ export const transformData = (data) => {
       }
     });
 
-    return newData;
-  } catch (error) {
-    console.log('загрузка');
-  }
-
+    return {
+      postData: newData,
+      after: data.data.after,
+    };
 }

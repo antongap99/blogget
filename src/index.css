@@ -118,6 +118,10 @@ iframe {
   width: 1px;
   overflow: hidden;
 }
-
+#notification-root {
+  position: fixed;
+  bottom: 30px;
+  right: 10px;
+}
 
 
