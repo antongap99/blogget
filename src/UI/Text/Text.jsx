@@ -14,7 +14,8 @@ export const Text = prop => {
     children,
     href,
     medium,
-    bold
+    bold,
+    onClick,
   } = prop;
 
   const classes = classNames(
@@ -29,7 +30,7 @@ export const Text = prop => {
   )
 
 
-  return <As className={classes} href={href}>{children}</As>
+  return <As className={classes} href={href} onClick={onClick}>{children}</As>
 };
 
 
@@ -48,5 +49,6 @@ Text.propTypes = {
   href: PropTypes.string,
   center: PropTypes.bool,
   bold: PropTypes.bool,
-  medium: PropTypes.bool,  
+  medium: PropTypes.bool, 
+  onClick: PropTypes.func, 
 }

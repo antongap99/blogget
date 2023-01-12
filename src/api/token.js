@@ -12,7 +12,6 @@ export const getToken = () => {
   // после авторизации
   if (window.location.pathname.includes('/auth')) {
     token = new URLSearchParams(window.location.hash.substring(1)).get('access_token');
-    console.log('token: ', token);
     setToken(token);
   }
   // взять токен из local storage

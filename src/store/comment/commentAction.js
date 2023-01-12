@@ -5,6 +5,8 @@ export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 export const COMMENT_REQUEST = 'COMMENT_REQUEST';
 export const COMMENT_REQUEST_SUCCESS = 'COMMENT_REQUEST_SUCCESS';
 export const COMMENT_REQUEST_ERROR = 'COMMENT_REQUEST_ERROR';
+export const CLEAR_COMMENT_DATA = 'CLEAR_COMMENT_DATA';
+
 
 export const updateComment = (comment) => ({
   type: UPDATE_COMMENT,
@@ -25,6 +27,10 @@ export const commentRequestError = (error) => ({
   error,
 });
 
+export const clearCommentData = () => ({
+  type: CLEAR_COMMENT_DATA
+})
+
 export const requestCommentDataAsync = (postId)  => (dispatch, getState) => {
   const token = getState().token.token;
   dispatch(commentRequest());
@@ -36,7 +42,7 @@ export const requestCommentDataAsync = (postId)  => (dispatch, getState) => {
     .then(({data: postData}) => {
       const [
         { data: {
-          children: [{ data: { author, preview: { images: [{ source: { url } }] } } }]
+          children: [{ data: { author } }]
         } },
         { data: {
           children: [{ data: { author: authorComments, body } }]
@@ -46,14 +52,12 @@ export const requestCommentDataAsync = (postId)  => (dispatch, getState) => {
       const commentData = {
         author,
         authorComments,
-        url,
         body,
       }
-
       dispatch(commentRequestSuccess(commentData));
     })
     .catch((err) => {
       console.log(err);
-      dispatch(commentRequestError(err));
+      dispatch(commentRequestError(err.message));
     })
 }

@@ -3,6 +3,7 @@ import {
   COMMENT_REQUEST,
   COMMENT_REQUEST_SUCCESS,
   COMMENT_REQUEST_ERROR,
+  CLEAR_COMMENT_DATA,
 } from "./commentAction";
 
 const initialState = {
@@ -37,6 +38,12 @@ export const commentReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.error,
+      }
+    case CLEAR_COMMENT_DATA:
+      return {
+        ...state,
+        loading: false,
+        commentData: {},
       }
     default:
       return state;
