@@ -5,8 +5,6 @@ import {
   POSTS_CLEAR,
   POST_REQUEST_SUCCESS_AFTER,
   CHANGE_PAGE,
-  INCREAMENT_COUNT_REQUEST,
-  CLEAR_COUNT_REQUEST,
 } from './postDataAction';
 const initialState = {
   loading: false,
@@ -63,16 +61,6 @@ export const postsDataReducer = (state = initialState, action) => {
         isLast: false,
         countRequest: 0,
       };
-      case INCREAMENT_COUNT_REQUEST:
-        return {
-          ...state,
-          countRequest: action.countRequest 
-        };
-        case CLEAR_COUNT_REQUEST:
-          return {
-            ...state,
-            countRequest: 0,
-          };
 
     default:
       return state;

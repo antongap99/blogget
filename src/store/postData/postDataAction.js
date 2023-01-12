@@ -1,6 +1,7 @@
 import axios from "axios";
 import { URL_API } from "../../api/const";
 import { transformData } from "../../utilities/transformData";
+import { IncreamentCountRequest } from "../countRequst/countRequestAction";
 
 export const POST_REQUEST = 'POST_REQUEST';
 export const POST_REQUEST_SUCCESS = 'POST_REQUEST_SUCCESS';
@@ -8,8 +9,7 @@ export const POST_REQUEST_SUCCESS_AFTER = 'POST_REQUEST_SUCCESS_AFTER';
 export const POST_REQUEST_ERROR = 'POST_REQUEST_ERROR';
 export const POSTS_CLEAR = 'POSTS_CLEAR';
 export const CHANGE_PAGE = 'CHANGE_PAGE';
-export const INCREAMENT_COUNT_REQUEST = 'INCREAMENT_COUNT_REQUEST';
-export const CLEAR_COUNT_REQUEST = 'CLEAR_COUNT_REQUEST';
+
 
 export const postRequest = () => ({
   type: POST_REQUEST,
@@ -43,14 +43,6 @@ export const changePage = (page) => ({
   page,
 })
 
-export const IncreamentCountRequest = (count) => ({
-  type: INCREAMENT_COUNT_REQUEST,
-  countRequest: count,
-})
-
-export const clearCountRequest = () => ({
-  type: CLEAR_COUNT_REQUEST,
-})
 
 
 export const postDataRequestAsync = (newPage) => (dispatch, getState) => {
@@ -65,7 +57,7 @@ export const postDataRequestAsync = (newPage) => (dispatch, getState) => {
   const after = getState().postData.after;
   const loading = getState().postData.loading;
   const isLast = getState().postData.isLast; 
-  const countRequest = getState().postData.countRequest;
+  const countRequest = getState().countRequest.countRequest;
 
 
   if(!token || loading || isLast || !page || countRequest === 2) return;

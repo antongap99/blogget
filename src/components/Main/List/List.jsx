@@ -6,13 +6,14 @@ import PropTypes from 'prop-types';
 import { Loader } from '../../../UI/Loader/Loader';
 import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux';
-import { clearCountRequest, postDataRequestAsync } from '../../../store/postData/postDataAction';
+import {  postDataRequestAsync } from '../../../store/postData/postDataAction';
+import { clearCountRequest } from '../../../store/countRequst/countRequestAction';
 import { Outlet, useParams } from 'react-router-dom';
 
 export const List = () => {
   const posts = useSelector(state => state.postData.postData);
   const token = useSelector(state => state.token.token);
-  const countRequest = useSelector(state => state.postData.countRequest)
+  const countRequest = useSelector(state => state.countRequest.countRequest)
   const endList = useRef(null);
   const dispatch = useDispatch();
   const { page } = useParams();
@@ -58,7 +59,7 @@ export const List = () => {
         }
         <li ref={endList} className={style.end} />
       </ul>
-      {countRequest === 2 && <button onClick={() => {
+      {countRequest === 2 && <button className={style.button} onClick={() => {
             dispatch(clearCountRequest());
             dispatch(postDataRequestAsync(page));
       }}>Загрузить еще</button>}
