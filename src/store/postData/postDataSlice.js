@@ -42,6 +42,9 @@ export const postDataSlice = createSlice({
   name: 'comments',
   initialState,
   reducers: {
+    postsUpdate: (state, action) => {
+      state.postData = action.payload.postdata
+    },
     postRequest: (state) => {
       state.status = 'pending'
       state.error = {};
@@ -49,6 +52,7 @@ export const postDataSlice = createSlice({
     },
     postRequestSuccess: (state, action) => {
       console.log(action.payload);
+      console.log(action.payload.postData);
       state.status = 'laoded';
       state.loading = false;
       state.postData = action.payload.postData;
@@ -56,7 +60,6 @@ export const postDataSlice = createSlice({
       state.isLast = !action.payload.after;
     },
     postRequestSuccessAfter: (state, action) => {
-      console.log('action: ', action);
       state.status = 'laoded'
       state.loading = false;
       state.postData = [...state.postData, ...action.payload.postData];
