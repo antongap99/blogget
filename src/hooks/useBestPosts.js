@@ -1,6 +1,7 @@
 import {  useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { postClear, postDataRequestAsync } from "../store/postData/postDataAction";
+import { postDataRequestAsync } from "../store/postData/postDataAction";
+import { postDataSlice } from "../store/postData/postDataSlice";
 
 export const useBestPosts = () => {
   const posts = useSelector(state => state.postData.postData);
@@ -8,7 +9,7 @@ export const useBestPosts = () => {
   const dispatch = useDispatch();
 
   const setBestPosts = () => {
-    dispatch(postClear());
+    dispatch(postDataSlice.actions.postClear());
   }
 
   useEffect(() => {

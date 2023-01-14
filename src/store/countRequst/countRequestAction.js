@@ -1,7 +1,7 @@
 export const INCREAMENT_COUNT_REQUEST = 'INCREAMENT_COUNT_REQUEST';
 export const CLEAR_COUNT_REQUEST = 'CLEAR_COUNT_REQUEST';
 
-export const IncreamentCountRequest = (count) => ({
+export const increamentCountRequest = (count) => ({
   type: INCREAMENT_COUNT_REQUEST,
   countRequest: count,
 })

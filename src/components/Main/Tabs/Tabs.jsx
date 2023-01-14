@@ -12,6 +12,9 @@ import { useEffect } from 'react';
 import { debounceRaf } from '../../../utilities/debounce';
 import { Text } from '../../../UI/Text/Text';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+// import { postClear } from '../../../store/postData/postDataAction';
+import { postDataSlice } from '../../../store/postData/postDataSlice';
 
 const LIST = [
   { value: 'Главная', Icon: HomeIcon, link: 'rising' },
@@ -26,6 +29,7 @@ export const Tabs = () => {
   const [isDropDown, setIdDropDown] = useState(true)
   const [menuActiveTitle, setMenuActiveTitle] = useState('menu');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleResize = () => {
     if (document.documentElement.clientWidth < 768) {
@@ -72,7 +76,8 @@ export const Tabs = () => {
                 key={id}
                 onClick={() => {
                   setMenuActiveTitle(value);
-                  navigate(`/category/${link}`)
+                  navigate(`/category/${link}`);
+                  dispatch(postDataSlice.actions.postClear())
                 }}>
                 <button className={style.btn} onClick={handleClickNenu}>
                   {value}

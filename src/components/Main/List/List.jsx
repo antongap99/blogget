@@ -10,17 +10,22 @@ import { postDataRequestAsync } from '../../../store/postData/postDataAction';
 import { clearCountRequest } from '../../../store/countRequst/countRequestAction';
 import { Outlet, useParams } from 'react-router-dom';
 
+
 export const List = () => {
   const posts = useSelector(state => state.postData.postData);
+  const isLast = useSelector(state => state.postData.isLast);
+  console.log(isLast);
   const token = useSelector(state => state.token.token);
   const countRequest = useSelector(state => state.countRequest.countRequest)
   const endList = useRef(null);
   const dispatch = useDispatch();
   const { page } = useParams();
 
+
+
   useEffect(() => {
     dispatch(postDataRequestAsync(page));
-  }, [page])
+  }, [page]);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -45,8 +50,8 @@ export const List = () => {
     <>
       <ul className={style.list}>
         {
-          token ?
-            (posts ? posts.map((item) => (
+          token  ?
+            (posts.length ? posts.map((item) => (
               <Post key={item.id} postData={item} />
             ))
               : <div className={style.loadwrap}><Loader color={"#99bab3"} size={50} /></div>)
@@ -57,7 +62,8 @@ export const List = () => {
         }
         <li ref={endList} className={style.end} />
       </ul>
-      {(countRequest === 2 || !token) && <button className={style.button} onClick={() => {
+      {(countRequest === 2 ) && <button className={style.button} onClick={() => {
+       
         dispatch(clearCountRequest());
         dispatch(postDataRequestAsync(page));
       }}>Загрузить еще</button>}

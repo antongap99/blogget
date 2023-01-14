@@ -3,7 +3,7 @@ import { requestCommentDataAsync } from "./commentAction";
 
 const initialState = {
   comment: 'Привет redux',
-  loading: false,
+  status: '',
   commentData: {},
   error: {},
 }
@@ -19,7 +19,7 @@ export const commentsSlice = createSlice({
     },
      
     clearCommentData: (state) => {
-      state.loading = 'loaded';
+      state.status = '';
       state.commentData = {};
     }, 
   },

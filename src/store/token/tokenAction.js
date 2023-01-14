@@ -3,7 +3,7 @@ export const DELETE_TOKEN = 'DELETE_TOKEN';
 
 export const deleteToken = () => ({
   type: DELETE_TOKEN,
-  token: '',
+  token: null,
 });
 
 export const updateToken = (token) => ({
