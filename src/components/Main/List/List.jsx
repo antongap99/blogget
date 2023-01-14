@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Loader } from '../../../UI/Loader/Loader';
 import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux';
-import {  postDataRequestAsync } from '../../../store/postData/postDataAction';
+import { postDataRequestAsync } from '../../../store/postData/postDataAction';
 import { clearCountRequest } from '../../../store/countRequst/countRequestAction';
 import { Outlet, useParams } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ export const List = () => {
   const endList = useRef(null);
   const dispatch = useDispatch();
   const { page } = useParams();
- 
+
   useEffect(() => {
     dispatch(postDataRequestAsync(page));
   }, [page])
@@ -34,12 +34,10 @@ export const List = () => {
 
 
     return () => {
-      if (endList.current  ) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+      if (endList.current) {
         observer.unobserve(endList.current);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endList.current, page])
 
 
@@ -59,11 +57,11 @@ export const List = () => {
         }
         <li ref={endList} className={style.end} />
       </ul>
-      {countRequest === 2 && <button className={style.button} onClick={() => {
-            dispatch(clearCountRequest());
-            dispatch(postDataRequestAsync(page));
+      {(countRequest === 2 || !token) && <button className={style.button} onClick={() => {
+        dispatch(clearCountRequest());
+        dispatch(postDataRequestAsync(page));
       }}>Загрузить еще</button>}
-      <Outlet/>
+      <Outlet />
     </>
   )
 }

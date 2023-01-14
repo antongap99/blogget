@@ -4,6 +4,7 @@ import { requestCommentDataAsync } from "../store/comment/commentAction";
 
 export const useCommentsData = (postId) => {
   const comment = useSelector(state => state.comment.commentData);
+  const status = useSelector(state => state.comment.status);
   const token = useSelector(state => state.token.token);
   const dispatch = useDispatch()
 
@@ -13,5 +14,5 @@ export const useCommentsData = (postId) => {
   }, [postId, token]);
 
 
-  return [comment]
+  return [comment, status]
 }

@@ -8,17 +8,16 @@ const initialState = {
 
 export const countRequestReducer = (state = initialState, action) => {
   switch (action.type) {
-
-      case INCREAMENT_COUNT_REQUEST:
-        return {
-          ...state,
-          countRequest: action.countRequest 
-        };
-        case CLEAR_COUNT_REQUEST:
-          return {
-            ...state,
-            countRequest: 0,
-          };
+    case INCREAMENT_COUNT_REQUEST:
+      return {
+        ...state,
+        countRequest: action.countRequest
+      };
+    case CLEAR_COUNT_REQUEST:
+      return {
+        ...state,
+        countRequest: 0,
+      };
 
     default:
       return state;

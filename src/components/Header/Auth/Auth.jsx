@@ -13,12 +13,14 @@ import { useAuth } from '../../../hooks/useAuth';
 import { Loader } from '../../../UI/Loader/Loader'
 import { useBestPosts } from '../../../hooks/useBestPosts';
 import { Notification } from '../../Notification/Notification';
+import { useNavigate } from 'react-router-dom';
 
 const Auth = () => {
   const [showLogout, setShowLogout] = useState(false);
   const [auth, loading, clearAuth] = useAuth();
   const [, setBestPosts] = useBestPosts();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const getOut = () => {
     setShowLogout(!showLogout);
@@ -30,7 +32,7 @@ const Auth = () => {
     setBestPosts([])
     localStorage.removeItem('posts');
     dispatch(deleteToken())
-    // window.location.href = 'http://localhost:3000/'
+    navigate('/')
   }
 
   return (

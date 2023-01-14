@@ -10,7 +10,7 @@ import { Comments } from './Comments/Comments';
 import { Loader } from '../../UI/Loader/Loader'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { clearCommentData } from '../../store/comment/commentAction';
+import { commentsSlice } from '../../store/comment/commentsSlice';
 
 export const Modal = () => {
   const { id, page } = useParams();
@@ -19,7 +19,7 @@ export const Modal = () => {
   const closeBtnRef = useRef(null);
   const [isOpenCommentForm, setIsOpenCommentForm] = useState(false);
   const dispatch = useDispatch();
-  const [comment] = useCommentsData(id);
+  const [comment, status] = useCommentsData(id);
   const { author, authorComments, body } = comment;
 
 
@@ -48,7 +48,7 @@ export const Modal = () => {
     return () => {
       document.removeEventListener('click', handleClick)
       document.removeEventListener('keydown', handleClick);
-      dispatch(clearCommentData());
+      dispatch(commentsSlice.actions.clearCommentData());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -57,7 +57,8 @@ export const Modal = () => {
   return ReactDOM.createPortal(
     <div className={style.overlay} ref={overlayRef}>
       <div className={style.modal}>
-        {author ?
+        { status !== 'error' ? 
+        (author ?
           (
             <>
               <h2 className={style.title}>{'title'}</h2>
@@ -82,6 +83,8 @@ export const Modal = () => {
               {isOpenCommentForm && <FormComment />}
             </>)
           : <div className={style.loadwrap}><Loader color={"#99bab3"} size={50} /></div>
+          )
+          : 'ошибка'
         }
         <button className={style.close} ref={closeBtnRef}><CloseIcon /></button>
       </div>

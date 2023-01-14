@@ -46,10 +46,11 @@ export const changePage = (page) => ({
 
 
 export const postDataRequestAsync = (newPage) => (dispatch, getState) => {
-
+ 
   let page = getState().postData.page;
   if(newPage && page !== newPage ) {
      page = newPage;
+     console.log('1');
     dispatch(changePage(page));
   }
 
@@ -60,9 +61,10 @@ export const postDataRequestAsync = (newPage) => (dispatch, getState) => {
   const countRequest = getState().countRequest.countRequest;
 
 
+
   if(!token || loading || isLast || !page || countRequest === 2) return;
   dispatch(postRequest());
-
+  console.log('1');
   axios.get(`${URL_API}/${page}?limit=12&${after ? `after=${after}`: ''}`, {
     headers: {
       Authorization: `bearer ${token}`,

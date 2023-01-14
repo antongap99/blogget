@@ -1,11 +1,11 @@
 import axios from "axios";
-  import { URL_API } from "../../api/const";
+import { URL_API } from "../../api/const";
 import { deleteToken } from "../token/tokenAction";
 
-export const  AUTH_REQUEST = 'AUTH_REQUEST';
-export const  AUTH_REQUEST_SUCCESS = 'AUTH_REQUEST_SUCCESS';
-export const  AUTH_REQUEST_ERROR = 'AUTH_REQUEST_ERROR';
-export const AUTH_LOGOUT = 'AUTH_LOGOUT'; 
+export const AUTH_REQUEST = 'AUTH_REQUEST';
+export const AUTH_REQUEST_SUCCESS = 'AUTH_REQUEST_SUCCESS';
+export const AUTH_REQUEST_ERROR = 'AUTH_REQUEST_ERROR';
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 
 export const authRequest = () => ({
   type: AUTH_REQUEST,
