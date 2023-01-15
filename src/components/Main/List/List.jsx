@@ -13,14 +13,11 @@ import { Outlet, useParams } from 'react-router-dom';
 
 export const List = () => {
   const posts = useSelector(state => state.postData.postData);
-  const isLast = useSelector(state => state.postData.isLast);
-  console.log(isLast);
   const token = useSelector(state => state.token.token);
   const countRequest = useSelector(state => state.countRequest.countRequest)
   const endList = useRef(null);
   const dispatch = useDispatch();
   const { page } = useParams();
-
 
 
   useEffect(() => {

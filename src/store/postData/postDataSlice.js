@@ -51,8 +51,6 @@ export const postDataSlice = createSlice({
       state.loading = true;
     },
     postRequestSuccess: (state, action) => {
-      console.log(action.payload);
-      console.log(action.payload.postData);
       state.status = 'laoded';
       state.loading = false;
       state.postData = action.payload.postData;
@@ -77,7 +75,6 @@ export const postDataSlice = createSlice({
       state.countRequest = 0;
     },
     changePage: (state, action) => {
-      console.log('action: ', action);
       state.page = action.payload;
       state.after = '';
       state.isLast = false;

@@ -1,10 +1,38 @@
+import { useState } from 'react';
+import { useEffect } from 'react';
 import style from './Search.module.css';
+import { URL_API } from '../../../api/const';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const Search = props => {
+  const token = useSelector(state => state.token.token)
+  const [value, setValue] = useState('поиск')
+  
+  const inputHandle = e => {
+    e.preventDefault()
+    setValue(e.target.value)
+  }
+
+  useEffect(() => {
+    axios.get(`${URL_API}/search?q=${value}`, {
+      headers: {
+        Authorization: `bearer ${token}`,
+      }
+    })
+      .then(({data}) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        
+      })
+  }, [value])
+  
+
 
   return (
-    <form action="" method="get" className={style.form}>
-      <input className={style.search} type="search" name="search" id="" />
+    <form action="" method="get" className={style.form} onSubmit={inputHandle}>
+      <input className={style.search} type="search" name="search" defaultValue={value}  />
       <button className={style.button}>
         <svg className={style.svg} width="128" height="128" viewBox="0 0 128 128" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <g>
