@@ -12,32 +12,6 @@ const initialState = {
 }
 
 
-
-// export const postRequest = () => ({
-//   type: POST_REQUEST,
-// })
-
-
-// export const postRequestSuccess = (data) => ({
-//   type: POST_REQUEST_SUCCESS,
-//   postData: data.postData,
-//   after: data.after,
-// })
-
-// export const postRequestSuccessAfter = (data) => ({
-//   type: POST_REQUEST_SUCCESS_AFTER,
-//   postData: data.postData,
-//   after: data.after,
-// })
-
-// export const postRequestError = (error) => ({
-//   type: POST_REQUEST_ERROR,
-//   error,
-// })
-
-
-
-
 export const postDataSlice = createSlice({
   name: 'comments',
   initialState,

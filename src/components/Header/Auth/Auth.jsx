@@ -7,20 +7,22 @@ import { auth_url } from '../../../api/auth';
 import { Text } from '../../../UI/Text/Text';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteToken } from '../../../store/token/tokenAction';
 import { useAuth } from '../../../hooks/useAuth';
 import { Loader } from '../../../UI/Loader/Loader'
-import { useBestPosts } from '../../../hooks/useBestPosts';
 import { Notification } from '../../Notification/Notification';
 import { useNavigate } from 'react-router-dom';
+import { postDataSlice } from '../../../store/postData/postDataSlice';
 
 const Auth = () => {
   const [showLogout, setShowLogout] = useState(false);
   const [auth, loading, clearAuth] = useAuth();
-  const [, setBestPosts] = useBestPosts();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const status = useSelector(state => state.auth.status);
+  const isLast = useSelector(state => state.postData.isLast);
+  console.log('isLast: ', isLast);
 
   const getOut = () => {
     setShowLogout(!showLogout);
@@ -29,7 +31,7 @@ const Auth = () => {
   const logOut = () => {
     clearAuth({});
     setShowLogout(false);
-    setBestPosts([])
+    dispatch(postDataSlice.actions.postClear())
     localStorage.removeItem('posts');
     dispatch(deleteToken())
     navigate('/')
@@ -52,9 +54,10 @@ const Auth = () => {
         (
           <Text className={style.authLink} As={'a'} href={auth_url}>
             <SaveIcon className={style.svg} />
-            <Notification log={'Ошибка авторизации. Попробуйте авторизоваться еще раз'}/>
+            {status === 'error' && <Notification color={'red'} log={'Ошибка авторизации. Попробуйте авторизоваться еще раз'}/>}
+            {/* {isLast && <Notification color={'yellow'} log={'посты закончились'}/>} */}
           </Text>
-          
+
         )
       }
     </div>
