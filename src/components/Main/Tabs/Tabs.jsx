@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 // import { postClear } from '../../../store/postData/postDataAction';
 import { postDataSlice } from '../../../store/postData/postDataSlice';
+import { clearCountRequest } from '../../../store/countRequst/countRequestAction';
 
 const LIST = [
   { value: 'Главная', Icon: HomeIcon, link: 'rising' },
@@ -42,6 +43,7 @@ export const Tabs = () => {
   const handleClickNenu = e => {
     const target = e.target;
     setMenuActiveTitle(target.textContent);
+    dispatch(clearCountRequest());
   }
 
 

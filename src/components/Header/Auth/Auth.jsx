@@ -21,8 +21,6 @@ const Auth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const status = useSelector(state => state.auth.status);
-  const isLast = useSelector(state => state.postData.isLast);
-  console.log('isLast: ', isLast);
 
   const getOut = () => {
     setShowLogout(!showLogout);

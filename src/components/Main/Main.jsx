@@ -8,7 +8,7 @@ import { Start } from './Start/Start';
 import { ErrorPage } from './ErrorPage/ErrorPage'
 
 // :page -  ключ , который используется для того, чтобы получать путь к определенному контенту
-// можно было бы использовать несколько Route, для разного контента в зависимости от url, 
+// можно было бы использовать несколько Route, для разного контента в зависимости от url,
 // но так как рендерится один и тоже компонент List , то можно использовать эту возможность
 export const Main = () => (
   <main className={style.main}>
@@ -16,6 +16,9 @@ export const Main = () => (
       <Tabs />
       <Routes>
         <Route path='/category/:page' element={<List />}>
+          <Route path={'post/:id'} element={<Modal />} />
+        </Route>
+        <Route path='/search' element={<List />}>
           <Route path={'post/:id'} element={<Modal />} />
         </Route>
         <Route path={'/'} element={<Start />} />

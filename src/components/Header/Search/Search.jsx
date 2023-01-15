@@ -1,38 +1,37 @@
-import { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import style from './Search.module.css';
-import { URL_API } from '../../../api/const';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { searchPostsRequestAsync } from '../../../store/postData/postDataAction';
+import { clearCountRequest } from '../../../store/countRequst/countRequestAction';
+import { useNavigate } from 'react-router-dom';
+import {postDataSlice} from '../../../store/postData/postDataSlice';
 
-const Search = props => {
-  const token = useSelector(state => state.token.token)
-  const [value, setValue] = useState('поиск')
-  
-  const inputHandle = e => {
-    e.preventDefault()
-    setValue(e.target.value)
+const Search = () => {
+  const [value, setValue] = useState('');
+  const dispatch = useDispatch();
+  const input = useRef(null);
+  const navigate = useNavigate();
+
+  const searchSubmit = e => {
+    e.preventDefault();
+    setValue(input.current.value)
   }
 
   useEffect(() => {
-    axios.get(`${URL_API}/search?q=${value}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-      }
-    })
-      .then(({data}) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        
-      })
-  }, [value])
-  
+    dispatch(searchPostsRequestAsync(value));
+    dispatch(clearCountRequest());
+  }, [value]);
+
 
 
   return (
-    <form action="" method="get" className={style.form} onSubmit={inputHandle}>
-      <input className={style.search} type="search" name="search" defaultValue={value}  />
+    <form action="" method="get" className={style.form} onSubmit={searchSubmit}>
+      <input className={style.search} type="search" name="search" defaultValue={value} ref={input} onClick={() => {
+        navigate('/search');
+        dispatch(postDataSlice.actions.postClear());
+      }} />
       <button className={style.button}>
         <svg className={style.svg} width="128" height="128" viewBox="0 0 128 128" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <g>

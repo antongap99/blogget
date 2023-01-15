@@ -20,6 +20,7 @@ export const List = () => {
   const { page } = useParams();
 
 
+
   useEffect(() => {
     dispatch(postDataRequestAsync(page));
   }, [page]);
@@ -47,20 +48,28 @@ export const List = () => {
     <>
       <ul className={style.list}>
         {
-          token  ?
-            (posts.length ? posts.map((item) => (
+          token ?
+            posts.length ? posts.map((item) => (
               <Post key={item.id} postData={item} />
             ))
-              : <div className={style.loadwrap}><Loader color={"#99bab3"} size={50} /></div>)
+              : (!window.location.pathname.includes('/search') ?
+                <div className={style.loadwrap}><Loader color={"#99bab3"} size={50} /></div>
+                :
+                <li>
+                  <h1>Введите запрос</h1>
+                </li>
+              )
             :
             (<li>
               <h1>Попробуйте авторизоваться</h1>
             </li>)
+
+
+
         }
         <li ref={endList} className={style.end} />
       </ul>
-      {(countRequest === 2 ) && <button className={style.button} onClick={() => {
-       
+      {(countRequest === 2) && <button className={style.button} onClick={() => {
         dispatch(clearCountRequest());
         dispatch(postDataRequestAsync(page));
       }}>Загрузить еще</button>}
