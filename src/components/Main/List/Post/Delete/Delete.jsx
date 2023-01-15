@@ -9,13 +9,8 @@ export const Delete = ({id}) => {
   const dispatch = useDispatch()
 
   const deleteHandle = e => {
-    const newPostData = [...postData]
-    newPostData.forEach((post, index, array) => {
-        if(post.id === id){
-          console.log(array.splice(index, 1));
-          dispatch(postDataSlice.actions)
-        }
-    });
+    const newPostData = postData.filter((post) => post.id !==id)
+    dispatch(postDataSlice.actions.deletePost({newPostData}))
   }
 
   return (

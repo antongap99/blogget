@@ -24,7 +24,7 @@ export const useSearch = (value) => {
         setSearchPosts(transformData(data))
       })
       .catch((err) => {
-        
+        console.log('err: ', err); 
       })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   } , [token])

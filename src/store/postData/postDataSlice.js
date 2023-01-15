@@ -70,6 +70,9 @@ export const postDataSlice = createSlice({
       state.after = action.payload.after;
       state.isLast = !action.payload.after;
     },
+    deletePost: (state, action) => {
+      state.postData = action.payload.newPostData;
+    }
   },
 });
 
