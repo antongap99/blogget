@@ -5,6 +5,13 @@
   flex-direction: column;
   justify-content: center;
 }
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 30px;
+}
+
 .title{
   font-size: 20px;
 }

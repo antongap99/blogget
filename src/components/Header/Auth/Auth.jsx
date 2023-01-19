@@ -7,11 +7,10 @@ import { auth_url } from '../../../api/auth';
 import { Text } from '../../../UI/Text/Text';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch  } from 'react-redux';
 import { deleteToken } from '../../../store/token/tokenAction';
 import { useAuth } from '../../../hooks/useAuth';
 import { Loader } from '../../../UI/Loader/Loader'
-import { Notification } from '../../Notification/Notification';
 import { useNavigate } from 'react-router-dom';
 import { postDataSlice } from '../../../store/postData/postDataSlice';
 
@@ -20,8 +19,7 @@ const Auth = () => {
   const [auth, loading, clearAuth] = useAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const status = useSelector(state => state.auth.status);
-
+  
   const getOut = () => {
     setShowLogout(!showLogout);
   }
@@ -34,7 +32,6 @@ const Auth = () => {
     dispatch(deleteToken())
     navigate('/')
   }
-
   return (
     <div className={style.container}>
       {loading ? (<Loader color={ "#99bab3"} size={15}/>) : auth.name ?
@@ -52,10 +49,7 @@ const Auth = () => {
         (
           <Text className={style.authLink} As={'a'} href={auth_url}>
             <SaveIcon className={style.svg} />
-            {status === 'error' && <Notification color={'red'} log={'Ошибка авторизации. Попробуйте авторизоваться еще раз'}/>}
-            {/* {isLast && <Notification color={'yellow'} log={'посты закончились'}/>} */}
           </Text>
-
         )
       }
     </div>

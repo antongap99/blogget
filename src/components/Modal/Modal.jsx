@@ -41,7 +41,6 @@ export const Modal = () => {
 
 
   useEffect(() => {
-
     document.addEventListener('click', handleClick);
     document.addEventListener('keydown', handleClick);
 
